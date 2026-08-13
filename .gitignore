@@ -71,3 +71,19 @@ formcms.settings.json
 *.tfstate.backup
 .terraform.lock.hcl
 server/FormCMS.MonoApp/plugins/YoutubeDownloader.dll
+# IDE / OS
+.idea/
+.vs/
+.vscode/
+.DS_Store
+.antigravity/
+
+# build output & runtime data
+dist/
+artifacts/
+node_modules/
+*.log
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
