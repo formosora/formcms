@@ -1,5 +1,10 @@
 # FormCMS: The AI-Powered App Platform
 
+[![NuGet](https://img.shields.io/nuget/v/FormCMS)](https://www.nuget.org/packages/FormCMS)
+[![.NET 10](https://img.shields.io/badge/.NET-10-512BD4)](https://dotnet.microsoft.com/download)
+[![Docker Pulls](https://img.shields.io/docker/pulls/jaike/formcms-mono)](https://hub.docker.com/repository/docker/jaike/formcms-mono)
+[![License: MIT](https://img.shields.io/github/license/formosora/formcms)](LICENSE)
+
 FormCMS is an open-source platform that turns natural language into full-stack apps — schemas, APIs, UI, and deployment — in minutes. Ship with Docker, build with AI agents, scale to millions of records.
 
 ---
@@ -130,9 +135,69 @@ For production deployment with PostgreSQL, see the [Docker Hub page](https://hub
 
 ---
 
+## 🔨 Build from Source
+
+**Prerequisite:** [.NET 10 SDK](https://dotnet.microsoft.com/download)
+
+```bash
+git clone https://github.com/formosora/formcms.git
+cd formcms
+
+dotnet build formcms.sln
+
+# All-in-one host: REST API + GraphQL + MCP server
+dotnet run --project server/FormCMS.MonoApp
+# → http://localhost:5000  (API: /api · MCP: /mcp/sse)
+
+# Test suite
+dotnet test server/FormCms.Course.Tests
+```
+
+Notes:
+
+- The browser admin portal (**FormMate**) is a separate Node.js/React app. In development, MonoApp reverse-proxies `/mate` to the FormMate dev server on `127.0.0.1:3001`; the Docker image above bundles everything prebuilt, so use it for the full out-of-box UI experience.
+- The Course demo and the per-database examples are orchestrated with **.NET Aspire** (Docker Desktop required), e.g. `dotnet run --project server/FormCMS.Course.AppHost`.
+
+---
+
+## 🧰 Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Backend | .NET 10 / ASP.NET Core (C# 14) |
+| Data access | EF Core 10 · SqlKata · FluentMigrator |
+| Databases | SQLite · PostgreSQL · SQL Server · MySQL · MongoDB |
+| APIs | REST · GraphQL (GraphQL.NET + GraphiQL) · MCP over SSE |
+| Caching & messaging | HybridCache · Redis (RedLock) · Kafka · NATS |
+| Admin UI | FormMate portal (Node.js/Fastify + React), served prebuilt from the mono image |
+| Orchestration & ops | Docker · Kubernetes manifests (`etc/k8s_deploy`) · .NET Aspire · MkDocs |
+
+---
+
+## 📁 Repository Structure
+
+```
+├── server/
+│   ├── FormCMS/                          # Core engine — published as the `FormCMS` NuGet package
+│   ├── FormCMS.MonoApp/                  # All-in-one host (API + MCP + assets) — base of the Docker image
+│   ├── FormCMS.Course/                   # Full-featured course/demo application
+│   ├── FormCMS.Course.AppHost/           # .NET Aspire orchestration host
+│   ├── FormCMS.Course.ServiceDefaults/   # Aspire shared service defaults
+│   └── FormCms.Course.Tests/             # Automated test suite
+├── examples/                             # Per-database starters: SqliteDemo · PostgresDemo · SqlServerDemo · MysqlDemo
+├── YoutubeDownloader/                    # Example plugin (YoutubeExplode-based asset downloader)
+├── etc/                                  # Ops extras: k8s_deploy, performance_tests, pg-replica, schema-ui, sqlserver-fts
+├── doc/                                  # Documentation sources: readme-parts, mkdoc (MkDocs), wiki assets, diagrams
+└── formcms.sln                           # Visual Studio solution (14 projects)
+```
+
+---
+
 ## 📚 Learn More
 
 📖 [Documentation Wiki](https://github.com/formcms/formcms/wiki) · [Architecture](https://github.com/formcms/formcms/wiki/Architecture.md) · [Performance & Scalability](https://github.com/formcms/formcms/wiki/Performance-Scalability.md) · [Setup Guide](https://github.com/formcms/formcms/wiki/Setup.md)
+
+In this repo: [System design notes](doc/wiki/system-design-formCMS.md) · [Query performance](doc/wiki/query-performance.md)
 
 ---
 
@@ -147,3 +212,15 @@ FormCMS is actively evolving toward a vision of **AI-native app development**:
 | **Marketplace** | Community ecosystem | Pre-built app templates, community components, one-click install |
 
 > **The Vision:** Describe your app in plain English → AI generates the entire backend → deploy with one click.
+
+---
+
+## 🤝 Contributing
+
+Issues and pull requests are welcome. For larger changes, open an issue first to discuss the direction. To get your environment running, see [Build from Source](#-build-from-source) above and the upstream [Development Setup Guide](https://github.com/formcms/formcms/wiki/Setup.md).
+
+## 📄 License
+
+[MIT](LICENSE) © FormCMS.
+
+> This repository mirrors the open-source [FormCMS](https://github.com/FormCMS/formcms) project. The live demo, documentation wiki, Docker images, and YouTube tutorials linked above are hosted by the upstream project.

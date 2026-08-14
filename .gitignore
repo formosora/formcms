@@ -1,89 +1,45 @@
-/admin-panel/node_modules
-/examples/fluent-cms-postgres-docker/db_data
-/examples/fluent-cms-postgres-docker/db_data_1m
-/examples/fluent-cms-postgres-docker/db_data_1m_back
-/examples/fluent-cms-postgres-docker/db_data_demo
-/k8s_deploy/db-app/.terraform/
-/k8s_deploy/db-app/.terraform.lock.hcl
-/k8s_deploy/db-app/terraform.tfstate
-/k8s_deploy/db-app/terraform.tfstate.backup
-/k8s_deploy/eks-ebs/.terraform/
-/k8s_deploy/eks-ebs/.terraform/modules/
-/k8s_deploy/eks-ebs/.terraform/modules/ebs_csi_eks_role/
-/k8s_deploy/eks-ebs/.terraform/modules/modules.json
-/k8s_deploy/eks-ebs/mainfest/
-/k8s_deploy/eks-ebs/mainfest/claim.yaml
-/k8s_deploy/eks-ebs/mainfest/pod.yaml
-/k8s_deploy/eks/db-app/terraform.tfvars
-/k8s_deploy/eks/db-app/.terraform.lock.hcl
-/k8s_deploy/eks/db-app/terraform.tfstate
-/k8s_deploy/eks/db-app/terraform.tfstate.backup
-/k8s_deploy/eks/db-app/.terraform/
-/k8s_deploy/eks/cluster/.terraform/
-/k8s_deploy/eks/cluster/.terraform.lock.hcl
-/k8s_deploy/eks/cluster/terraform.tfstate
-/k8s_deploy/eks/cluster/terraform.tfstate.backup
-/k8s_deploy/eks/ebs/terraform.tfstate
-/k8s_deploy/eks/ebs/terraform.tfstate.backup
-/k8s_deploy/eks/ebs/.terraform/
-/k8s_deploy/eks/ebs/mainfest/
-/server/FluentCMS.IntegrationTests/temp.db
-/server/FluentCMS.IntegrationTests/default.db
+# ---- .NET build output ----
 bin/
 obj/
-/packages/
-riderModule.iml
-/_ReSharper.Caches/
-/FluentCMS.Blog/wwwroot/files
-.DS_Store
-/.vs/fluent-cms/v17
-/.vs/fluent-cms/DesignTimeBuild
-/.vs/fluent-cms/FileContentIndex
-/.vs/formcms/FileContentIndex
-/.vs
-*.user
-/examples/WebApiExamples/Properties/launchSettings.json
-/.gitignore
+out/
+dist/
+publish/
+artifacts/
+packages/
 
-# User uploads and generated static assets
-**/wwwroot/files/
-**/wwwroot/static-assets/
-
-# IDE settings
+# ---- IDE / OS ----
 .idea/
+.vs/
+.vscode/
+.antigravity/
+*.user
+*.suo
+riderModule.iml
+_ReSharper.Caches/
+.DS_Store
+Thumbs.db
 
-# Build results
-**/bin/
-**/obj/
-**/out/
-**/publish/
-
-# Local databases
+# ---- Local databases & runtime state ----
 *.db
 *.db-shm
 *.db-wal
+*.sqlite
+*.log
 formcms.settings.json
 
-# Terraform
+# ---- User uploads / generated assets ----
+**/wwwroot/files/
+**/wwwroot/static-assets/
+
+# ---- Plugin build output ----
+server/FormCMS.MonoApp/plugins/YoutubeDownloader.dll
+
+# ---- Node / frontend ----
+node_modules/
+
+# ---- Terraform ----
 .terraform/
 *.tfvars
 *.tfstate
 *.tfstate.backup
 .terraform.lock.hcl
-server/FormCMS.MonoApp/plugins/YoutubeDownloader.dll
-# IDE / OS
-.idea/
-.vs/
-.vscode/
-.DS_Store
-.antigravity/
-
-# build output & runtime data
-dist/
-artifacts/
-node_modules/
-*.log
-*.db
-*.db-shm
-*.db-wal
-*.sqlite
